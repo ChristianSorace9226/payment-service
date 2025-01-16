@@ -1,0 +1,28 @@
+spring:
+  application:
+    name: pagamento_service
+  datasource:
+    url: jdbc:h2:tcp://localhost:9092/~/albergo
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+  h2:
+    console:
+      enabled: true
+
+server:
+  servlet:
+    context-path: /api
+
+  port: 8086
+
+external-call:
+
+
+
