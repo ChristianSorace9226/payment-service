@@ -10,7 +10,6 @@ import java.io.Serial;
 import java.io.Serializable;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class PagamentoResponse implements Serializable {
