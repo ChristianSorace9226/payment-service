@@ -7,9 +7,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-@FeignClient(name = "prenotazione_external", url = "http://localhost:8081/api/front-end-service")
+@FeignClient(name = "prenotazione_external", url = "http://localhost:8081/api/util")
 public interface PrenotazioneExternalController {
 
-    @PostMapping("/get-prezzo-camera")
+    @PostMapping("/get-info-prenotazione")
     ResponseEntity<CustomResponse<InfoPrenotazione>> getInfoPrenotazione(@RequestBody Integer idPrenotazione);
 }
