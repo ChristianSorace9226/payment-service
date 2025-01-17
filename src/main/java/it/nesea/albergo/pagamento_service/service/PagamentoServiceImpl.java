@@ -27,7 +27,7 @@ public class PagamentoServiceImpl implements PagamentoService {
     public PagamentoResponse effettuaPagamento(PagamentoRequest request) {
         log.info("Effettuo il pagamento con la prenotazione {}", request.getIdPrenotazione());
 
-        InfoPrenotazione infoPrenotazione = prenotazioneExternalController.getInfoPrenotazione(request.getIdPrenotazione());
+        InfoPrenotazione infoPrenotazione = prenotazioneExternalController.getInfoPrenotazione(request.getIdPrenotazione()).getBody().getResponse();
         if (infoPrenotazione == null) {
             log.error("Prenotazione non trovata con id {}", request.getIdPrenotazione());
             throw new NotFoundException("Prenotazione non trovata");
@@ -39,7 +39,7 @@ public class PagamentoServiceImpl implements PagamentoService {
             log.info("Pagamento effettuato con successo per la prenotazione {}", request.getIdPrenotazione());
             credito.setCreditoResiduo(credito.getCreditoResiduo().subtract(infoPrenotazione.getPrezzoTotale()));
             creditoRepository.save(credito);
-            return new PagamentoResponse(credito.getCreditoResiduo(),"Pagamento andato a buon fine");
+            return new PagamentoResponse(credito.getCreditoResiduo(), "Pagamento andato a buon fine");
         }
         throw new CreditoNonSufficienteException("Credito esaurito. Ricaricare per continuare");
     }
