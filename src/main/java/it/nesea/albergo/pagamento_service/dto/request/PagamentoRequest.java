@@ -1,5 +1,6 @@
 package it.nesea.albergo.pagamento_service.dto.request;
 
+import jakarta.validation.constraints.NotNull;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -14,4 +15,8 @@ import java.io.Serializable;
 public class PagamentoRequest implements Serializable {
     @Serial
     private static final long serialVersionUID = -3135263482062830291L;
+
+    @NotNull(message = "codice prenotazione necessario")
+    Integer idPrenotazione;
+
 }
