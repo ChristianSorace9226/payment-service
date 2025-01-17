@@ -25,4 +25,12 @@ public class Pagamento implements Serializable {
     @SequenceGenerator(name = "pagamentoGenerator", schema = "pagamento_service", sequenceName = "seq_pagamento", allocationSize = 1)
     @Column(name = "ID", nullable = false, precision = 4)
     Integer id;
+
+    @Column(name = "ID_PRENOTAZIONE")
+    Integer idPrenotazione;
+
+    @Column(name = "ANNULLATO")
+    Boolean annullato;
+
+
 }

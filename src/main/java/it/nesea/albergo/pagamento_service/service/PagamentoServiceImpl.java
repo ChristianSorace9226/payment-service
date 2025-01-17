@@ -1,7 +1,6 @@
 package it.nesea.albergo.pagamento_service.service;
 
 import it.nesea.albergo.common_lib.dto.InfoPrenotazione;
-import it.nesea.albergo.common_lib.exception.BadRequestException;
 import it.nesea.albergo.common_lib.exception.NotFoundException;
 import it.nesea.albergo.pagamento_service.controller.feign.PrenotazioneExternalController;
 import it.nesea.albergo.pagamento_service.dto.request.PagamentoRequest;
@@ -10,9 +9,6 @@ import it.nesea.albergo.pagamento_service.exception.CreditoNonSufficienteExcepti
 import it.nesea.albergo.pagamento_service.model.Credito;
 import it.nesea.albergo.pagamento_service.model.repository.CreditoRepository;
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.criteria.CriteriaBuilder;
-import jakarta.persistence.criteria.CriteriaQuery;
-import jakarta.persistence.criteria.Root;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
@@ -38,11 +34,12 @@ public class PagamentoServiceImpl implements PagamentoService {
         }
 
         Credito credito = creditoRepository.findByIdUtente(infoPrenotazione.getIdUtente());
-        if(credito != null && credito.getCreditoResiduo().compareTo(infoPrenotazione.getPrezzoTotale()) > 0){
+
+        if (credito != null && credito.getCreditoResiduo().compareTo(infoPrenotazione.getPrezzoTotale()) >= 0) {
             log.info("Pagamento effettuato con successo per la prenotazione {}", request.getIdPrenotazione());
             credito.setCreditoResiduo(credito.getCreditoResiduo().subtract(infoPrenotazione.getPrezzoTotale()));
-            entityManager.merge(credito);
-            return new PagamentoResponse();
+            creditoRepository.save(credito);
+            return new PagamentoResponse(credito.getCreditoResiduo(),"Pagamento andato a buon fine");
         }
         throw new CreditoNonSufficienteException("Credito esaurito. Ricaricare per continuare");
     }
