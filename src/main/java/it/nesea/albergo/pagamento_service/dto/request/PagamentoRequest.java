@@ -19,4 +19,7 @@ public class PagamentoRequest implements Serializable {
     @NotNull(message = "codice prenotazione necessario")
     Integer idPrenotazione;
 
+    @NotNull(message = "va definita una modalità di pagamento")
+    Boolean anticipo;
+
 }

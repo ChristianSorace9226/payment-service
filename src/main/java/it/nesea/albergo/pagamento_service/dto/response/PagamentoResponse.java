@@ -16,6 +16,5 @@ public class PagamentoResponse implements Serializable {
     @Serial
     private static final long serialVersionUID = 5493284205096854653L;
 
-    BigDecimal creditoResiduo;
     String messaggio;
 }

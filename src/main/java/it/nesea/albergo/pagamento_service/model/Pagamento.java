@@ -9,6 +9,8 @@ import lombok.experimental.FieldDefaults;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.math.BigDecimal;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "PAGAMENTO", schema = "PAGAMENTO_SERVICE")
@@ -26,11 +28,28 @@ public class Pagamento implements Serializable {
     @Column(name = "ID", nullable = false, precision = 4)
     Integer id;
 
-    @Column(name = "ID_PRENOTAZIONE")
+    @Column(name = "ID_PRENOTAZIONE", nullable = false)
     Integer idPrenotazione;
 
-    @Column(name = "ANNULLATO")
-    Boolean annullato;
+    @Column(name = "ID_METODO_PAGAMENTO", nullable = false)
+    Integer idMetodoPagamento;
 
+    @Column(name = "ID_STATO_PAGAMENTO", nullable = false)
+    Integer idStatoPagamento;
+
+    @Column(name = "IMPORTO_ANTICIPO")
+    BigDecimal importoAnticipo;
+
+    @Column(name = "IMPORTO_SALDO", nullable = false)
+    BigDecimal importoSaldo;
+
+    @Column(name = "DATA_ANTICIPO")
+    LocalDate dataAnticipo;
+
+    @Column(name = "SCADENZA_SALDO")
+    LocalDate scadenzaSaldo;
+
+    @Column(name = "CREDITO_RIMPORSATO")
+    BigDecimal creditoRimborsato;
 
 }
