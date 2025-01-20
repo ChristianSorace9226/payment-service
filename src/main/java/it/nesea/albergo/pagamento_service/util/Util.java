@@ -3,10 +3,12 @@ package it.nesea.albergo.pagamento_service.util;
 import it.nesea.albergo.common_lib.dto.InfoPrenotazione;
 import it.nesea.albergo.pagamento_service.dto.request.PagamentoRequest;
 import it.nesea.albergo.pagamento_service.model.Pagamento;
+import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+@Component
 public class Util {
 
     public void gestisciPagamentoAnticipo(Pagamento pagamento, InfoPrenotazione prenotazione) {
